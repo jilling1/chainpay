@@ -18,3 +18,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/logout', function () { \Auth::logout(); return redirect('login'); });
+    Route::get('/profile', function () { return 'TODO'; })->name('profile');
+
+
+
+
+});

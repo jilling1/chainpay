@@ -8,7 +8,7 @@
                     <div class="sidebar-header text-white bg-info">
                         <div class="sidebar-brand d-flex justify-content-between align-items-center">
                             <div class="title text-truncate">
-                                Simplify Admin
+                                {{ config('app.name') }}
                             </div>
                             <div class="logo align-items-center justify-content-around">
                                 <i class="material-icons">all_inclusive</i>
@@ -17,19 +17,33 @@
                     </div>
                     <div class="sidebar-nav-container">
                         <ul class="list-nav sidebar-nav list-nav-dark list-nav-dark-info">
-                            <li class="list-nav-group-title">
-                            <span>
-                              DASHBOARDS
-                            </span>
-                            </li>
                             <li class="list-nav-item">
                                 <a href="{{route('home')}}" class="list-nav-link">
                                   <span class="list-nav-icon">
                                     <i class="material-icons">home</i>
                                   </span>
-                                    <span class="list-nav-label">Dashboard Pro</span>
+                                    <span class="list-nav-label">Dashboard</span>
                                 </a>
                             </li>
+
+                            <li class="list-nav-item">
+                                <a href="{{route('home')}}" class="list-nav-link">
+                                  <span class="list-nav-icon">
+                                    <i class="material-icons">compare_arrows</i>
+                                  </span>
+                                    <span class="list-nav-label">Transactions</span>
+                                </a>
+                            </li>
+
+                            <li class="list-nav-item">
+                                <a href="{{route('home')}}" class="list-nav-link">
+                                    <span class="list-nav-icon">
+                                        <i class="material-icons">account_balance_wallet</i>
+                                    </span>
+                                    <span class="list-nav-label">Wallets</span>
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -61,9 +75,8 @@
                                     <i class="material-icons">expand_more</i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item empty-link">Profile</a>
-                                    <a class="dropdown-item empty-link">Account</a>
-                                    <a class="dropdown-item empty-link">Security</a>
+                                    <a class="dropdown-item empty-link" href="{{route('profile') }}">Profile</a>
+                                    <a class="dropdown-item empty-link" href="{{route('logout') }}">Logout</a>
                                 </div>
                             </li>
                         </ul>
