@@ -20,11 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/logout', function () { \Auth::logout(); return redirect('login'); });
     Route::get('/profile', function () { return 'TODO'; })->name('profile');
+    Route::get('/account-settings', 'UserController@accountSettings')->name('account-settings');
 
-
-
-
+    Route::post('/seller_details', 'UserController@saveSellerDetails')->name('save-seller-details');
 });

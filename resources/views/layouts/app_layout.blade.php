@@ -11,7 +11,7 @@
                                 {{ config('app.name') }}
                             </div>
                             <div class="logo align-items-center justify-content-around">
-                                <i class="material-icons">all_inclusive</i>
+                                <i class="material-icons">home</i>
                             </div>
                         </div>
                     </div>
@@ -22,16 +22,16 @@
                                   <span class="list-nav-icon">
                                     <i class="material-icons">home</i>
                                   </span>
-                                    <span class="list-nav-label">Dashboard</span>
+                                    <span class="list-nav-label">Company Info</span>
                                 </a>
                             </li>
 
                             <li class="list-nav-item">
-                                <a href="{{route('home')}}" class="list-nav-link">
+                                <a href="{{route('account-settings')}}" class="list-nav-link">
                                   <span class="list-nav-icon">
-                                    <i class="material-icons">compare_arrows</i>
+                                    <i class="material-icons">settings</i>
                                   </span>
-                                    <span class="list-nav-label">Transactions</span>
+                                    <span class="list-nav-label">Account settings</span>
                                 </a>
                             </li>
 
@@ -40,7 +40,7 @@
                                     <span class="list-nav-icon">
                                         <i class="material-icons">account_balance_wallet</i>
                                     </span>
-                                    <span class="list-nav-label">Wallets</span>
+                                    <span class="list-nav-label">Payments</span>
                                 </a>
                             </li>
 
