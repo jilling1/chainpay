@@ -1,6 +1,6 @@
 "use strict";
 $(function(){
-  // Initialize Sidebar Switching
+  //Initialize Sidebar Switching
   $('.sidebar.sidebar-left').collpasibleSlider({
       toggleButtons:'.sidebar-toggle',
       hideButtons:'.sidebar-hide',

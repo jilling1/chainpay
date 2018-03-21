@@ -3,3 +3,5 @@
 <link rel="stylesheet" href="/vendor/perfect-scrollbar.css">
 <link rel="stylesheet" href="/css/simplify.min.css">
 <link rel="stylesheet" href="/vendor/c3.min.css">
+
+<link rel="stylesheet" href="/css/toastr.css">

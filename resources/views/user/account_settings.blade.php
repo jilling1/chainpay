@@ -10,7 +10,7 @@
                 <div class="card-header">
                     <b>Seller details</b>
                 </div>
-                <form class="ajax_form_save" action="{{route('save-seller-details')}}" method="post">
+                <form class="ajax_form_save" action="{{route('save-seller-details')}}" data-title="Seller details" method="post">
                     {{csrf_field()}}
                     <div class="card-body row">
                         <div class="col-md-12">
