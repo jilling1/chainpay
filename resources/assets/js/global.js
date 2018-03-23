@@ -14,6 +14,6 @@ $('form.ajax_form_save').on('submit', (evt)=>{
     }).then(()=>{
         toastr.success(title + ' was saved');
     }).fail((error)=>{
-
+        toastr.error(error.responseJSON.message);
     });
 });

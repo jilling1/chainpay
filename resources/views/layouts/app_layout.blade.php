@@ -18,7 +18,7 @@
                     <div class="sidebar-nav-container">
                         <ul class="list-nav sidebar-nav list-nav-dark list-nav-dark-info">
                             <li class="list-nav-item">
-                                <a href="{{route('home')}}" class="list-nav-link">
+                                <a href="{{route('company-info')}}" class="list-nav-link">
                                   <span class="list-nav-icon">
                                     <i class="material-icons">home</i>
                                   </span>
@@ -59,7 +59,7 @@
                         <i class="material-icons">menu</i>
                     </button>
                     <div class="navbar-text ml-3 d-none d-sm-block">
-                        <h5 class="m-0 text-dark"> Dashboard </h5>
+                        <h5 class="m-0 text-dark"> @yield('title') </h5>
                     </div>
                     <div class="ml-auto d-sm-flex">
                         <div class="d-none d-sm-flex align-items-center">
@@ -75,7 +75,7 @@
                                     <i class="material-icons">expand_more</i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item empty-link" href="{{route('profile') }}">Profile</a>
+                                    <a class="dropdown-item empty-link" href="">Profile</a>
                                     <a class="dropdown-item empty-link" href="{{route('logout') }}">Logout</a>
                                 </div>
                             </li>

@@ -21,8 +21,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', function () { \Auth::logout(); return redirect('login'); });
-    Route::get('/profile', function () { return 'TODO'; })->name('profile');
+
+    Route::get('/company-info', 'UserController@companyInfo')->name('company-info');
     Route::get('/account-settings', 'UserController@accountSettings')->name('account-settings');
 
-    Route::post('/seller_details', 'UserController@saveSellerDetails')->name('save-seller-details');
+
+    Route::post('/seller-details', 'UserController@saveSellerDetails')->name('save-seller-details');
+    Route::post('/user-email', 'UserController@saveUserEmail')->name('save-email');
+    Route::post('/user-password', 'UserController@saveUserPassword')->name('save-password');
+
+    Route::post('/wallets-addresses', 'UserController@saveWalletsAddresses')->name('save-wallets-addresses');
 });
