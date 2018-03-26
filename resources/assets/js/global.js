@@ -3,8 +3,9 @@ $('form.ajax_form_save').on('submit', (evt)=>{
 
     let action = evt.target.action,
         // formData = new FormData(evt.target);
-        formData = $(evt.target).serialize(),
-        title = $(evt.target).data('title');
+        form = $(evt.target),
+        formData = form.serialize(),
+        title = form.data('title');
 
     $.ajax({
         url: action,
@@ -15,5 +16,12 @@ $('form.ajax_form_save').on('submit', (evt)=>{
         toastr.success(title + ' was saved');
     }).fail((error)=>{
         toastr.error(error.responseJSON.message);
+    }).always((response)=>{
+        if(form.data('callback')){
+            window[form.data('callback')](form, response);
+        }
+        if(form.data('clearfields')){
+            form.find('input:not([type="hidden"])').val('');
+        }
     });
 });
