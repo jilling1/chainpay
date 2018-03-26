@@ -32,8 +32,7 @@ class UserController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'company_name' => 'required',
-            'phone_number' => ''
+            'company_name' => 'required'
         ]);
         $request->user()->fill([
             'first_name' => $request->get('first_name'),

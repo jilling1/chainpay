@@ -32,3 +32,5 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/wallets-addresses', 'UserController@saveWalletsAddresses')->name('save-wallets-addresses');
 });
+
+Route::get('create-address-endpoint', 'TestController@createAddress');
