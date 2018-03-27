@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PaymentsController extends Controller
 {
@@ -17,6 +20,16 @@ class PaymentsController extends Controller
             'amount' => 'required|numeric',
             'callback_url' => 'url',
         ]);
+
+        $user = User::where('user_token');
+
+        $paymentForwardingObject = app('BlockCypher')->createPaymentEndpoint();
+
+        print_r($paymentForwardingObject);
+
+//        $payment = Payment::create([
+//
+//        ]);
     }
 
     public function checkPaymentStatus(){

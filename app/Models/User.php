@@ -18,6 +18,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'seller_id',
         'first_name',
         'last_name',
         'company_name',
@@ -35,4 +36,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function payments(){
+        return $this->hasMany(Payment::class);
+    }
 }

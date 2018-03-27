@@ -43,18 +43,18 @@ class BlockCypher
         }
     }
 
-    public function createPaymentEndpoint($request)
+    public function createPaymentEndpoint($destination)
     {
-        $destination = 'n22KqARet8c4hDjRYuMJJ9WFZwRACbyN6g';
         $context = 'btc' . 'APIContext';
         $apiContext = $this->$context;
         $paymentForwardClient = new PaymentForwardClient($apiContext);
         $options = array(
             'callback_url' => env('APP_URL') . '/' . route('request-payment'),
             'process_fees_address' => env('FEES_ADDRESS'),
-            'process_fees_percent' => 0.01
+            'process_fees_percent' => env('FEE_PERCENT')
         );
-        $paymentForwardClient->createForwardingAddress($destination, $options);
+        $paymentForwardObject = $paymentForwardClient->createForwardingAddress($destination, $options);
+        dd($paymentForwardObject);
     }
 
     public function createAddressEndpoint()

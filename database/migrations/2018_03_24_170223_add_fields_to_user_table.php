@@ -14,6 +14,7 @@ class AddFieldsToUserTable extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
+            $table->string('seller_token')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('company_name')->nullable();
@@ -33,6 +34,7 @@ class AddFieldsToUserTable extends Migration
     {
         Schema::table('users', function($table)
         {
+            $table->dropColumn('seller_token');
             $table->dropColumn('first_name');
             $table->dropColumn('last_name');
             $table->dropColumn('company_name');
@@ -40,7 +42,6 @@ class AddFieldsToUserTable extends Migration
             $table->dropColumn('btc_address');
             $table->dropColumn('doge_address');
             $table->dropColumn('ltc_address');
-
         });
     }
 }
