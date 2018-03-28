@@ -16,14 +16,14 @@ class PaymentsController extends Controller
     public function requestPayment(Request $request){
         $request->validate([
             'seller_id' => 'required',
-            'currency' => 'required',
-            'amount' => 'required|numeric',
-            'callback_url' => 'url',
+//            'currency' => 'required',
+//            'amount' => 'required|numeric',
+//            'callback_url' => 'url',
         ]);
 
-        $user = User::where('user_token');
+        $user = User::where('seller_token', $request->get('seller_id') )->first();
 
-        $paymentForwardingObject = app('BlockCypher')->createPaymentEndpoint();
+        $paymentForwardingObject = app('BlockCypher')->createPaymentEndpoint($user->btc_address);
 
         print_r($paymentForwardingObject);
 

@@ -19,9 +19,7 @@ class BlockCypher
     public function __construct($token)
     {
         $this->token = $token;
-
         $config = ['mode' => 'sandbox'];
-
         try {
             $this->btcAPIContext = ApiContext::create(env('APP_ENV') === 'local' ? 'test3' : 'main', 'btc', 'v1',
                 new SimpleTokenCredential($token),
@@ -49,12 +47,12 @@ class BlockCypher
         $apiContext = $this->$context;
         $paymentForwardClient = new PaymentForwardClient($apiContext);
         $options = array(
-            'callback_url' => env('APP_URL') . '/' . route('request-payment'),
+            'callback_url' => route('request-payment'),
             'process_fees_address' => env('FEES_ADDRESS'),
             'process_fees_percent' => env('FEE_PERCENT')
         );
-        $paymentForwardObject = $paymentForwardClient->createForwardingAddress($destination, $options);
-        dd($paymentForwardObject);
+        $paymentForwardObject = $paymentForwardClient->createForwardingAddress($destination);
+        return $paymentForwardObject;
     }
 
     public function createAddressEndpoint()
