@@ -11,14 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/', 'UserController@companyInfo');
     Route::get('/home', 'UserController@companyInfo')->name('home');
 
     Route::get('/logout', function () { \Auth::logout(); return redirect('login'); });
