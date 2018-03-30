@@ -18,7 +18,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'seller_id',
+        'seller_token',
         'first_name',
         'last_name',
         'company_name',

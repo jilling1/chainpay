@@ -12,10 +12,16 @@ use function MongoDB\BSON\toJSON;
 class BlockCypher
 {
     private $token;
-    public $btcAPIContext;
+    private $btcAPIContext;
     private $dogeAPIContext;
     private $ltcAPIContext;
 
+    public $currency;
+
+    /**
+     * BlockCypher constructor.
+     * @param $token
+     */
     public function __construct($token)
     {
         $this->token = $token;
@@ -25,41 +31,62 @@ class BlockCypher
                 new SimpleTokenCredential($token),
                 $config
             );
-
             $this->dogeAPIContext = ApiContext::create('main', 'doge', 'v1',
                 new SimpleTokenCredential($token),
                 $config
             );
-
             $this->ltcAPIContext = ApiContext::create('main', 'ltc', 'v1',
                 new SimpleTokenCredential($token),
                 $config
             );
-
         } catch (BlockCypherConfigurationException $e) {
             dd($e);
         }
     }
 
+    /**
+     * @param $destination
+     * @return \BlockCypher\Api\PaymentForward
+     */
     public function createPaymentEndpoint($destination)
     {
-        $context = 'btc' . 'APIContext';
-        $apiContext = $this->$context;
+        $apiContext = $this->getApiContext();
         $paymentForwardClient = new PaymentForwardClient($apiContext);
         $options = array(
             'callback_url' => route('request-payment'),
             'process_fees_address' => env('FEES_ADDRESS'),
-            'process_fees_percent' => env('FEE_PERCENT')
+            'process_fees_percent' => (float)env('FEE_PERCENT')
         );
-        $paymentForwardObject = $paymentForwardClient->createForwardingAddress($destination);
+        $paymentForwardObject = $paymentForwardClient->createForwardingAddress($destination, $options);
         return $paymentForwardObject;
     }
 
+    /**
+     * For testing
+     * @return \BlockCypher\Api\AddressKeyChain
+     */
     public function createAddressEndpoint()
     {
         $addressClient = new AddressClient($this->btcAPIContext);
         $addressKeyChain = $addressClient->generateAddress();
         return $addressKeyChain;
+    }
+
+    /**
+     * @param $payId
+     */
+    public function removePaymentEndpoint($payId){
+        $apiContext = $this->getApiContext();
+        $paymentForwardClient = new PaymentForwardClient($apiContext);
+        $paymentForwardClient->deleteForwardingAddress($payId);
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getApiContext(){
+        $context = $this->currency . 'APIContext';
+        return $this->$context;
     }
 }
 
@@ -82,3 +109,11 @@ Fees address
 [address] => mkuHeAJcN4M5npcazVcMxeJS7aopEpeRCZ
 [wif] => cUf8Y7VQm3DvrVfhnFCSS5gdaSEBGwuiBKYL7qVsAu5Mojc3rMKc
 */
+
+//        [destination] => n22KqARet8c4hDjRYuMJJ9WFZwRACbyN6g
+//        [callback_url] => http://127.0.0.1:8000/api/request-payment
+//        [process_fees_address] => mkuHeAJcN4M5npcazVcMxeJS7aopEpeRCZ
+//        [process_fees_percent] => 0.01
+//        [id] => 51384e47-7353-4e5b-b0b5-db011f7b7adb
+//        [token] => 55531b01ed804d7e8ac642fed5586b62
+//        [input_address] => n42QeEtTLy6c3zBxucbvvTE8hBT4kLZ8DZ

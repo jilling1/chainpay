@@ -12,18 +12,20 @@ class Payment extends Model
         'payed',
         'user_id',
         'currency_id',
-        'full_Amount',
-        'payment_token'
+        'full_amount',
+        'payment_token',
+        'pay_id',
+        'callback_url'
     ];
 
     const AWAIT = 1;
     const PARTLY_PAYED = 2;
     const PAYED = 3;
 
-    public $statuses = [
-        'await' => self::AWAIT,
-        'partly_payed' => self::PARTLY_PAYED,
-        'payed' => self::PAYED
+    public static $status = [
+         self::AWAIT => 'await',
+         self::PARTLY_PAYED => 'partly_payed',
+         self::PAYED => 'payed'
     ];
 
     public function currency(){
