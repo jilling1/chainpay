@@ -16,19 +16,16 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', 'UserController@companyInfo');
-    Route::get('/home', 'UserController@companyInfo')->name('home');
-
     Route::get('/logout', function () { \Auth::logout(); return redirect('login'); });
 
     Route::get('/company-info', 'UserController@companyInfo')->name('company-info');
     Route::get('/account-settings', 'UserController@accountSettings')->name('account-settings');
-
+//    Route::get('/payments', 'PaymentsController@payments')->name('payments');
+    Route::get('/', 'PaymentsController@payments')->name('payments');
 
     Route::post('/seller-details', 'UserController@saveSellerDetails')->name('save-seller-details');
     Route::post('/user-email', 'UserController@saveUserEmail')->name('save-email');
     Route::post('/user-password', 'UserController@saveUserPassword')->name('save-password');
-
     Route::post('/wallets-addresses', 'UserController@saveWalletsAddresses')->name('save-wallets-addresses');
 });
 

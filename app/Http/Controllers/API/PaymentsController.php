@@ -40,8 +40,11 @@ class PaymentsController extends Controller
         $currencyFieldName = $currency->currency_code . '_address';
         if (empty($user->$currencyFieldName)) return response()->json($this->getErrorArray('User does not have a wallet'));
 
+        $paymentToken = str_random(16);
+        $callback = env('APP_URL'). '/payment-callback' . '?paymentToken=' . $paymentToken;
+
         app('BlockCypher')->currency = $currency->currency_code;
-        $paymentForwardingObject = app('BlockCypher')->createPaymentEndpoint($user->btc_address);
+        $paymentForwardingObject = app('BlockCypher')->createPaymentEndpoint($user->btc_address, $callback);
 
         $payment = Payment::create([
             'payment_forwarding_address' => $paymentForwardingObject->input_address,
@@ -49,15 +52,15 @@ class PaymentsController extends Controller
             'payed' => 0,
             'user_id' => $user->id,
             'currency_id' => $currency->id,
-            'full_Amount' => $request->get('amount'),
-            'payment_token' => str_random(16),
+            'full_amount' => (int)$request->get('amount'),
+            'payment_token' => $paymentToken,
             'pay_id' => $paymentForwardingObject->id,
             'callback_url' => $request->get('callback_url')
         ]);
 
         $data = [
             'address' => $payment->payment_forwarding_address,
-            'amount' => $payment->full_Amount,
+            'amount' => $payment->full_amount,
             'payment_token' => $payment->payment_token
         ];
 
@@ -108,10 +111,21 @@ class PaymentsController extends Controller
         return response()->json($this->getSuccessResponse($data));
     }
 
-    public function paymentCallback(Request $request)
+    public function paymentCallback(Request $request, $paymentToken)
     {
-
+        $payment = Payment::where('payment_token', $paymentToken)->firstOrFail();
+        $payment->payed = $payment->payed+$request->get('value');
+        if( $payment->payed >= $payment->full_amount ){
+            $payment->status = Payment::PAYED;
+        }else{
+            $payment->status = Payment::PARTLY_PAYED;
+        }
+        $payment->save();
     }
-
-
 }
+
+/*  value: 16241000,
+    input_address: 'mru16DpRPxUk5cneWGMy3LwyzmQbDYLzN5',
+    destination: 'n22KqARet8c4hDjRYuMJJ9WFZwRACbyN6g',
+    input_transaction_hash: 'f395a98504525d27ad61fd61186ea1dc0ed968b579f784cfb2b2e5b38f060eee',
+    transaction_hash: 'ba1b294ab92cd4482e7559559233787c08a73bccc115dc40aff4d038162aada3'*/

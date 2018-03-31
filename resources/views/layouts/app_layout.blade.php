@@ -11,7 +11,9 @@
                                 {{ config('app.name') }}
                             </div>
                             <div class="logo align-items-center justify-content-around">
-                                <i class="material-icons">home</i>
+                                <a href="{{route('payments')}}" style="color:white; text-decoration: none">
+                                    <i class="material-icons">home</i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -36,7 +38,7 @@
                             </li>
 
                             <li class="list-nav-item">
-                                <a href="{{route('home')}}" class="list-nav-link">
+                                <a href="{{route('payments')}}" class="list-nav-link">
                                     <span class="list-nav-icon">
                                         <i class="material-icons">account_balance_wallet</i>
                                     </span>

@@ -46,19 +46,26 @@ class BlockCypher
 
     /**
      * @param $destination
+     * @param $callback
      * @return \BlockCypher\Api\PaymentForward
      */
-    public function createPaymentEndpoint($destination)
+    public function createPaymentEndpoint($destination, $callback)
     {
         $apiContext = $this->getApiContext();
         $paymentForwardClient = new PaymentForwardClient($apiContext);
         $options = array(
-            'callback_url' => route('request-payment'),
+            'callback_url' => $callback,
             'process_fees_address' => env('FEES_ADDRESS'),
             'process_fees_percent' => (float)env('FEE_PERCENT')
         );
         $paymentForwardObject = $paymentForwardClient->createForwardingAddress($destination, $options);
         return $paymentForwardObject;
+    }
+
+    public function deletePaymentEndpoint($payId){
+        $apiContext = $this->getApiContext();
+        $paymentForwardClient = new PaymentForwardClient($apiContext);
+        $paymentForwardClient->deleteForwardingAddress($payId);
     }
 
     /**
@@ -75,7 +82,8 @@ class BlockCypher
     /**
      * @param $payId
      */
-    public function removePaymentEndpoint($payId){
+    public function removePaymentEndpoint($payId)
+    {
         $apiContext = $this->getApiContext();
         $paymentForwardClient = new PaymentForwardClient($apiContext);
         $paymentForwardClient->deleteForwardingAddress($payId);
@@ -84,7 +92,8 @@ class BlockCypher
     /**
      * @return mixed
      */
-    private function getApiContext(){
+    private function getApiContext()
+    {
         $context = $this->currency . 'APIContext';
         return $this->$context;
     }
@@ -117,3 +126,19 @@ Fees address
 //        [id] => 51384e47-7353-4e5b-b0b5-db011f7b7adb
 //        [token] => 55531b01ed804d7e8ac642fed5586b62
 //        [input_address] => n42QeEtTLy6c3zBxucbvvTE8hBT4kLZ8DZ
+
+/*
+req.query {}
+req.body { value: 16241000,
+  input_address: 'mru16DpRPxUk5cneWGMy3LwyzmQbDYLzN5',
+  destination: 'n22KqARet8c4hDjRYuMJJ9WFZwRACbyN6g',
+  input_transaction_hash: 'f395a98504525d27ad61fd61186ea1dc0ed968b579f784cfb2b2e5b38f060eee',
+  transaction_hash: 'ba1b294ab92cd4482e7559559233787c08a73bccc115dc40aff4d038162aada3' }
+req.url /
+req.headers { host: '46.101.117.134:9100',
+  'user-agent': 'BlockCypher HTTP Invoker',
+  'content-length': '321',
+  'content-type': 'application/json',
+  'x-eventtype': 'payment',
+  'accept-encoding': 'gzip' }
+*/

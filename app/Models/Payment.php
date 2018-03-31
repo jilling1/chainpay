@@ -21,11 +21,13 @@ class Payment extends Model
     const AWAIT = 1;
     const PARTLY_PAYED = 2;
     const PAYED = 3;
+    const TIME_EXCEED = 4;
 
     public static $status = [
-         self::AWAIT => 'await',
-         self::PARTLY_PAYED => 'partly_payed',
-         self::PAYED => 'payed'
+        self::AWAIT => 'await',
+        self::PARTLY_PAYED => 'partly_payed',
+        self::PAYED => 'payed',
+        self::TIME_EXCEED => 'time_exceed'
     ];
 
     public function currency(){
