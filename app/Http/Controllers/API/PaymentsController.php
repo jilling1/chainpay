@@ -41,7 +41,7 @@ class PaymentsController extends Controller
         if (empty($user->$currencyFieldName)) return response()->json($this->getErrorArray('User does not have a wallet'));
 
         $paymentToken = str_random(16);
-        $callback = env('APP_URL'). '/api/payment-callback/$paymentToken';
+        $callback = env('APP_URL'). '/api/payment-callback/'.$paymentToken;
 
         app('BlockCypher')->currency = $currency->currency_code;
         $paymentForwardingObject = app('BlockCypher')->createPaymentEndpoint($user->btc_address, $callback);
