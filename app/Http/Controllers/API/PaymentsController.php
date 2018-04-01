@@ -41,7 +41,7 @@ class PaymentsController extends Controller
         if (empty($user->$currencyFieldName)) return response()->json($this->getErrorArray('User does not have a wallet'));
 
         $paymentToken = str_random(16);
-        $callback = env('APP_URL'). '/payment-callback' . '?paymentToken=' . $paymentToken;
+        $callback = env('APP_URL'). '/api/payment-callback' . '?paymentToken=' . $paymentToken;
 
         app('BlockCypher')->currency = $currency->currency_code;
         $paymentForwardingObject = app('BlockCypher')->createPaymentEndpoint($user->btc_address, $callback);
@@ -114,13 +114,20 @@ class PaymentsController extends Controller
     public function paymentCallback(Request $request, $paymentToken)
     {
         $payment = Payment::where('payment_token', $paymentToken)->firstOrFail();
-        $payment->payed = $payment->payed+$request->get('value');
-        if( $payment->payed >= $payment->full_amount ){
-            $payment->status = Payment::PAYED;
-        }else{
-            $payment->status = Payment::PARTLY_PAYED;
+
+        if( $request->get('value') > 0){
+            $payment->payed = $payment->payed+$request->get('value');
+            if( $payment->payed >= $payment->full_amount ){
+                $payment->status = Payment::PAYED;
+                $payment->payment_forwarding_address = 'Deleted';
+                $payment->pay_id = 'Deleted';
+                app('BlockCypher')->currency = $payment->currency->currency_code;
+                app('BlockCypher')->deletePaymentEndpoint($payment->pay_id);
+            }else{
+                $payment->status = Payment::PARTLY_PAYED;
+            }
+            $payment->save();
         }
-        $payment->save();
     }
 }
 
