@@ -25,3 +25,23 @@ $('form.ajax_form_save').on('submit', (evt)=>{
         }
     });
 });
+
+var copyingMode = false;
+
+$('.copy-to-clipboard').on('click', (evt)=>{
+    $('#clipboard').val( evt.target.textContent );
+    copyingMode = true;
+    document.execCommand("copy");
+});
+
+document.addEventListener("copy", function(evt) {
+    if(copyingMode === true){
+        evt.preventDefault();
+        evt.clipboardData.setData( "text/plain", $('#clipboard').val() );
+        let prevTimeout = toastr.options.timeOut;
+        toastr.options.timeOut = 30;
+        toastr.info('Copied to clipboard');
+        toastr.options.timeOut = prevTimeout;
+        copyingMode = false;
+    }
+});

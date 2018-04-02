@@ -7,6 +7,7 @@ use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use \GuzzleHttp\Client;
 
 class PaymentsController extends Controller
 {
@@ -123,11 +124,26 @@ class PaymentsController extends Controller
                 $payment->pay_id = 'Deleted';
                 app('BlockCypher')->currency = $payment->currency->currency_code;
                 app('BlockCypher')->deletePaymentEndpoint($payment->pay_id);
+                $this->sendCallback($payment);
             }else{
                 $payment->status = Payment::PARTLY_PAYED;
             }
             $payment->save();
         }
+    }
+
+    private function sendCallback($payment){
+        $client = new Client();
+        $client->request(
+            'POST',
+            $payment->callback_url,
+            ['form_params' => [
+                'value' => $payment->payed,
+                'currency_id' => $payment->currency->currency_code,
+                'payment_token' => $payment->payment_token,
+                'status' => Payment::$status[$payment->status]
+            ]
+        ]);
     }
 }
 

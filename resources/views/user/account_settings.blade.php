@@ -41,5 +41,17 @@
                 </form>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <b>Your seller token</b>
+                </div>
+                <div class="card-body">
+                    <p class="copy-to-clipboard">
+                        {{\Auth::user()->seller_token}}
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
