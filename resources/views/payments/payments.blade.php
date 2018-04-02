@@ -38,7 +38,6 @@
             </div>
         </div>
     </div>
-    <input type="hidden" id="clipboard">
     <script>
         $(document).ready( function () {
             $('#payments-table').DataTable();

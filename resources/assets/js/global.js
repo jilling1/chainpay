@@ -29,7 +29,7 @@ $('form.ajax_form_save').on('submit', (evt)=>{
 var copyingMode = false;
 
 $('.copy-to-clipboard').on('click', (evt)=>{
-    $('#clipboard').val( evt.target.textContent );
+    $('#clipboard').val( evt.target.textContent.trim() );
     copyingMode = true;
     document.execCommand("copy");
 });
