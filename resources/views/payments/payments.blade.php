@@ -40,7 +40,7 @@
     </div>
     <script>
         $(document).ready( function () {
-            $('#payments-table').DataTable();
+            $('#payments-table').DataTable({"order": [[ 6, "desc" ]]});
         } );
     </script>
 @endsection
