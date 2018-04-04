@@ -27,9 +27,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/user-email', 'UserController@saveUserEmail')->name('save-email');
     Route::post('/user-password', 'UserController@saveUserPassword')->name('save-password');
     Route::post('/wallets-addresses', 'UserController@saveWalletsAddresses')->name('save-wallets-addresses');
+
+    Route::get('/testing-api', 'TestController@testingApi')->name('testing');
 });
 
 // testing routes
 Route::get('/create-address-endpoint', 'TestController@createAddress');
-
-Route::get('/testing-api', 'TestController@testingApi')->name('testing');
