@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/payment-create', 'API\PaymentsController@paymentCreate')->name('payment-create');
 Route::get('/payment-status', 'API\PaymentsController@paymentStatus')->name('payment-status');
-Route::post('/payment-callback', 'API\PaymentsController@paymentCallback')->name('payment-callback');
+Route::post('/payment-callback/{paymentToken}', 'API\PaymentsController@paymentCallback')->name('payment-callback');
