@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <label for="callback_url">Callback URL</label>
                             <input class="form-control" id="callback_url" name="callback_url" type="text"
-                                value="http://hahaha.hehehe">
+                                value="http://google.com">
                         </div>
                         <div class="col-md-12">
                             <div class="form-group text-right">
