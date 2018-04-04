@@ -46,6 +46,15 @@
                                 </a>
                             </li>
 
+                            <li class="list-nav-item">
+                                <a href="{{route('testing')}}" class="list-nav-link">
+                                    <span class="list-nav-icon">
+                                        <i class="material-icons">touch_app</i>
+                                    </span>
+                                    <span class="list-nav-label">Testing API</span>
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </div>

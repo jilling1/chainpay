@@ -11,4 +11,8 @@ class TestController extends Controller
         print_r ( app('BlockCypher')->createAddressEndpoint() );
         return '';
     }
+
+    public function testingApi(){
+        return view('test.api');
+    }
 }

@@ -95,12 +95,12 @@ class PaymentsController extends Controller
     }
 
     /**
-     * @param $paymentToken
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function paymentStatus($paymentToken)
+    public function paymentStatus(Request $request)
     {
-        $payment = Payment::where('payment_token', $paymentToken)->first();
+        $payment = Payment::where('payment_token', $request->get('payment_token'))->first();
         if(empty($payment)) return response()->json($this->getErrorArray('Payment not found'));
 
         $data = [
