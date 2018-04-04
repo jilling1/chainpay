@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use \GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 class PaymentsController extends Controller
 {
@@ -122,9 +123,17 @@ class PaymentsController extends Controller
                 $payment->status = Payment::PAYED;
                 $payment->payment_forwarding_address = 'Deleted';
                 $payment->pay_id = 'Deleted';
-                app('BlockCypher')->currency = $payment->currency->currency_code;
-                app('BlockCypher')->deletePaymentEndpoint($payment->pay_id);
-                $this->sendCallback($payment);
+                try{
+                    app('BlockCypher')->currency = $payment->currency->currency_code;
+                    app('BlockCypher')->deletePaymentEndpoint($payment->pay_id);
+                }catch(\Exception $e){
+                    Log::info($e->getMessage());
+                }
+                try{
+                    $this->sendCallback($payment);
+                }catch(\Exception $e){
+                    Log::info($e->getMessage());
+                };
             }else{
                 $payment->status = Payment::PARTLY_PAYED;
             }
