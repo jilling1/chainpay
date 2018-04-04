@@ -43,5 +43,14 @@
             $('#payments-table').DataTable({"order": [[ 6, "desc" ]]});
         } );
     </script>
+    <style>
+        .dataTable td{
+            clear: both;
+            margin-bottom: 6px !important;
+            max-width: none !important;
+            table-layout: fixed;
+            word-break: break-all;
+        }
+    </style>
 @endsection
 
