@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <form action="{{route('payment-create')}}" method="post">
                         <div class="form-group">
-                            <label for="amount">Amount</label>
+                            <label for="amount">Amount <span class="text-secondary">(in satoshi)</span></label>
                             <input class="form-control" id="amount" name="amount" type="number"
                                 value="1000">
                         </div>
@@ -56,6 +56,20 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <b>Some info</b>
+                </div>
+                <div class="card-body">
+                    <p>
+                        For make payments in btc test currency you can user the bitcoin testnet
+                        <a href="https://testnet.manu.backend.hamburg/faucet" target="_blank">faucet</a>.
+                        <br>
+                        Keep in mind that after each payment, amount reduce twice(minimal payment something about 0.001 btc)
+                    </p>
                 </div>
             </div>
         </div>
