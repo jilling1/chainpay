@@ -42,12 +42,12 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <b>Create payment</b>
+                    <b>Payment status</b>
                 </div>
                 <div class="card-body">
                     <form action="/api/payment-status" method="get">
                         <div class="form-group">
-                            <label for="payment_token">Payments Status</label>
+                            <label for="payment_token">Payment token</label>
                             <input class="form-control" id="payment_token" name="payment_token" type="text">
                         </div>
                         <div class="col-md-12">
