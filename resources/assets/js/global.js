@@ -1,3 +1,49 @@
+window.Clipboard = (function(window, document, navigator) {
+    var textArea,
+        copy;
+
+    function isOS() {
+        return navigator.userAgent.match(/ipad|iphone/i);
+    }
+
+    function createTextArea(text) {
+        textArea = document.createElement('textArea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+    }
+
+    function selectText() {
+        var range,
+            selection;
+
+        if (isOS()) {
+            range = document.createRange();
+            range.selectNodeContents(textArea);
+            selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+        } else {
+            textArea.select();
+        }
+    }
+
+    function copyToClipboard() {
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+    }
+
+    copy = function(text) {
+        createTextArea(text);
+        selectText();
+        copyToClipboard();
+    };
+
+    return {
+        copy: copy
+    };
+})(window, document, navigator);
+
 $('form.ajax_form_save').on('submit', (evt)=>{
     evt.preventDefault();
 
@@ -29,19 +75,11 @@ $('form.ajax_form_save').on('submit', (evt)=>{
 var copyingMode = false;
 
 $('.copy-to-clipboard').on('click', (evt)=>{
-    $('#clipboard').val( evt.target.textContent.trim() );
-    copyingMode = true;
-    document.execCommand("copy");
-});
-
-document.addEventListener("copy", function(evt) {
-    if(copyingMode === true){
-        evt.preventDefault();
-        evt.clipboardData.setData( "text/plain", $('#clipboard').val() );
-        let prevTimeout = toastr.options.timeOut;
-        toastr.options.timeOut = 30;
-        toastr.info('Copied to clipboard');
-        toastr.options.timeOut = prevTimeout;
-        copyingMode = false;
-    }
+    Clipboard.copy(evt.target.textContent.trim());
+    // let $temp = $("<input>");
+    // $("body").append($temp);
+    // $temp.val(evt.target.textContent.trim()).select();
+    // document.execCommand("copy");
+    // $temp.remove();
+    toastr.info('Copied to clipboard');
 });

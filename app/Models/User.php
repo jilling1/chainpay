@@ -9,6 +9,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const SELLER = 1;
+    const ADMIN = 2;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -18,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type',
         'seller_token',
         'first_name',
         'last_name',
@@ -25,7 +29,7 @@ class User extends Authenticatable
         'phone_number',
         'btc_address',
         'doge_address',
-        'ltc_address'
+        'ltc_address',
     ];
 
     /**
@@ -39,5 +43,9 @@ class User extends Authenticatable
 
     public function payments(){
         return $this->hasMany(Payment::class);
+    }
+
+    public function isAdmin(){
+        return $this->type == self::ADMIN;
     }
 }

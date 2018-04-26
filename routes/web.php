@@ -31,5 +31,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/testing-api', 'TestController@testingApi')->name('testing');
 });
 
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function(){
+    Route::get('sellers', 'AdminController@sellers');
+});
+
+
 // testing routes
 Route::get('/create-address-endpoint', 'TestController@createAddress');
