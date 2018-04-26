@@ -2,7 +2,7 @@
 @section('title', 'Payments')
 @section('content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" style="width: auto">
             <div class="card">
                 <div class="card-header">
                     <b>Payments</b>
