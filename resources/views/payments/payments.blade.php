@@ -20,19 +20,6 @@
                                 <th>Created</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($payments as $payment)
-                                <tr>
-                                    <td class="copy-to-clipboard">{{$payment->payment_forwarding_address}}</td>
-                                    <td class="copy-to-clipboard">{{$payment->full_amount}}</td>
-                                    <td>{{\App\Models\Payment::$status[$payment->status]}}</td>
-                                    <td>{{$payment->payed}}</td>
-                                    <td class="copy-to-clipboard">{{$payment->payment_token}}</td>
-                                    <td class="copy-to-clipboard">{{$payment->callback_url}}</td>
-                                    <td class="copy-to-clipboard">{{$payment->created_at}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -40,7 +27,21 @@
     </div>
     <script>
         $(document).ready( function () {
-            $('#payments-table').DataTable({"order": [[ 6, "desc" ]]});
+            $('#payments-table').DataTable({
+                "order": [[ 6, "desc" ]],
+                "ajax": "{{route('payments-query')}}",
+                "processing":true,
+                "serverSide":true,
+                "columns": [
+                    {name: 'payment_forwarding_address', data: 'payment_forwarding_address', searchable: true, className: 'copy-to-clipboard'},
+                    {name: 'full_amount', data: 'full_amount', searchable: false, className: 'copy-to-clipboard'},
+                    {name: 'status', data: 'status', searchable: false},
+                    {name: 'payed', data: 'payed', searchable: false, className: 'copy-to-clipboard'},
+                    {name: 'payment_token', data: 'payment_token', searchable: true, className: 'copy-to-clipboard'},
+                    {name: 'callback_url', data: 'callback_url', searchable: false, className: 'copy-to-clipboard'},
+                    {name: 'created_at', data: 'created_at', searchable: false, className: 'copy-to-clipboard'}
+                ]
+            });
         } );
     </script>
     <style>

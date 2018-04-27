@@ -72,14 +72,7 @@ $('form.ajax_form_save').on('submit', (evt)=>{
     });
 });
 
-var copyingMode = false;
-
-$('.copy-to-clipboard').on('click', (evt)=>{
-    Clipboard.copy(evt.target.textContent.trim());
-    // let $temp = $("<input>");
-    // $("body").append($temp);
-    // $temp.val(evt.target.textContent.trim()).select();
-    // document.execCommand("copy");
-    // $temp.remove();
+$('body').on('click', '.copy-to-clipboard', (evt)=>{
+    Clipboard.copy(evt.delegateTarget.textContent.trim());
     toastr.info('Copied to clipboard');
 });
