@@ -72,7 +72,7 @@ $('form.ajax_form_save').on('submit', (evt)=>{
     });
 });
 
-$('body').on('click', '.copy-to-clipboard', (evt)=>{
-    Clipboard.copy(evt.delegateTarget.textContent.trim());
+$('.copy-to-clipboard').on('click', (evt)=>{
+    Clipboard.copy(evt.currentTarget.textContent.trim());
     toastr.info('Copied to clipboard');
 });

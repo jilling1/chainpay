@@ -16,8 +16,8 @@ class AdminArea
     public function handle($request, Closure $next)
     {
 
-//        if( !\Auth::user()->isAdmin() )
-//            abort(404);
+        if( !\Auth::user()->isAdmin() )
+            abort(404);
         return $next($request);
     }
 }

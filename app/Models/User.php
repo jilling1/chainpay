@@ -29,7 +29,7 @@ class User extends Authenticatable
         'phone_number',
         'btc_address',
         'doge_address',
-        'ltc_address',
+        'ltc_address'
     ];
 
     /**
@@ -41,11 +41,24 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function payments(){
         return $this->hasMany(Payment::class);
     }
 
+    /**
+     * @return bool
+     */
     public function isAdmin(){
         return $this->type == self::ADMIN;
     }
+
+    protected $appends = array('seller_name');
+    public function getSellerNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
 }

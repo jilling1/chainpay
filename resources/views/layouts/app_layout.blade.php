@@ -33,7 +33,7 @@
                                   <span class="list-nav-icon">
                                     <i class="material-icons">settings</i>
                                   </span>
-                                    <span class="list-nav-label">Account settings</span>
+                                    <span class="list-nav-label">Account Settings</span>
                                 </a>
                             </li>
 
@@ -55,6 +55,24 @@
                                 </a>
                             </li>
 
+                            @if(\Auth::user()->isAdmin())
+                                <li class="list-nav-item">
+                                    <a href="{{route('sellers')}}" class="list-nav-link">
+                                    <span class="list-nav-icon">
+                                        <i class="material-icons">people</i>
+                                    </span>
+                                        <span class="list-nav-label">Sellers</span>
+                                    </a>
+                                </li>
+                                <li class="list-nav-item">
+                                    <a href="{{route('all-payments')}}" class="list-nav-link">
+                                    <span class="list-nav-icon">
+                                        <i class="material-icons">view_list</i>
+                                    </span>
+                                        <span class="list-nav-label">All Payments</span>
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>

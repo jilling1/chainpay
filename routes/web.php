@@ -19,9 +19,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/company-info', 'UserController@companyInfo')->name('company-info');
     Route::get('/account-settings', 'UserController@accountSettings')->name('account-settings');
-//    Route::get('/payments', 'PaymentsController@payments')->name('payments');
     Route::get('/', 'PaymentsController@payments')->name('payments');
-    Route::get('/sellers/query', 'PaymentsController@paymentsQuery')->name('payments-query');
+    Route::get('/payments/query', 'PaymentsController@paymentsQuery')->name('payments-query');
 
     Route::post('/seller-details', 'UserController@saveSellerDetails')->name('save-seller-details');
     Route::post('/user-email', 'UserController@saveUserEmail')->name('save-email');
@@ -32,7 +31,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function(){
-    Route::get('sellers', 'AdminController@sellers');
+    Route::get('sellers', 'AdminController@sellers')->name('sellers');
+    Route::get('sellers/query', 'AdminController@sellersQuery')->name('sellers-query');
+
+    Route::get('payments', 'AdminController@payments')->name('all-payments');
+    Route::get('payments/query', 'AdminController@paymentsQuery')->name('all-payments-query');
 });
 
 

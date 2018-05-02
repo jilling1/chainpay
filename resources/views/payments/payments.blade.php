@@ -27,21 +27,37 @@
     </div>
     <script>
         $(document).ready( function () {
-            $('#payments-table').DataTable({
+
+            let table = $('#payments-table');
+
+            table.DataTable({
                 "order": [[ 6, "desc" ]],
                 "ajax": "{{route('payments-query')}}",
                 "processing":true,
                 "serverSide":true,
                 "columns": [
-                    {name: 'payment_forwarding_address', data: 'payment_forwarding_address', searchable: true, className: 'copy-to-clipboard'},
-                    {name: 'full_amount', data: 'full_amount', searchable: false, className: 'copy-to-clipboard'},
+                    {name: 'payment_forwarding_address', data: 'payment_forwarding_address', searchable: true, orderable: false},
+                    {name: 'full_amount', data: 'full_amount', searchable: false},
                     {name: 'status', data: 'status', searchable: false},
-                    {name: 'payed', data: 'payed', searchable: false, className: 'copy-to-clipboard'},
-                    {name: 'payment_token', data: 'payment_token', searchable: true, className: 'copy-to-clipboard'},
-                    {name: 'callback_url', data: 'callback_url', searchable: false, className: 'copy-to-clipboard'},
-                    {name: 'created_at', data: 'created_at', searchable: false, className: 'copy-to-clipboard'}
+                    {name: 'payed', data: 'payed', searchable: false},
+                    {name: 'payment_token', data: 'payment_token', searchable: true, orderable: false},
+                    {name: 'callback_url', data: 'callback_url', searchable: false, orderable: false},
+                    {name: 'created_at', data: 'created_at', searchable: false}
                 ]
             });
+
+            function rebindCopy() {
+                let elements = table.find('tbody td');
+                elements.unbind('click');
+                elements.on('click', (evt)=>{
+                    Clipboard.copy(evt.currentTarget.textContent.trim());
+                    toastr.info('Copied to clipboard');
+                });
+            }
+
+            table.on( 'order.dt', function () { rebindCopy() } );
+            table.on( 'page.dt', function () { rebindCopy() } );
+            table.on( 'search.dt', function () { rebindCopy() } );
         } );
     </script>
     <style>

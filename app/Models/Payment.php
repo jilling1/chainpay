@@ -30,11 +30,32 @@ class Payment extends Model
         self::TIME_EXCEED => 'time_exceed'
     ];
 
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function getStatusAttribute($value){
+        return self::$status[$value];
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function currency(){
         return $this->belongsTo(Currency::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    protected $appends = array('full_amount_usd');
+    public function getFullAmountUsdAttribute()
+    {
+        return app('CurrencyRate')->getAmountRate($this->currency->currency_code, $this->full_amount);
+    }
+
 }

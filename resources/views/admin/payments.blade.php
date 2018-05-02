@@ -12,10 +12,12 @@
                         <thead>
                         <tr>
                             <th>Seller Token</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Company Name</th>
+                            <th>Seller Name</th>
+                            <th>Payment Address</th>
+                            <th>Amount</th>
+                            <th>Amount (USD)</th>
+                            <th>Date</th>
+                            <th>Status</th>
                         </tr>
                         </thead>
                     </table>
@@ -27,18 +29,20 @@
         $(document).ready( function () {
             let table = $('#sellers-table');
             table.DataTable({
-                // "order": [[ 6, "desc" ]],
-                "ajax": "{{route('sellers-query')}}",
+                "order": [[ 6, "desc" ]],
+                "ajax": "{{route('all-payments-query')}}",
                 "processing":true,
                 "serverSide":true,
-                "searching": false,
-                "sort": false,
+                // "searching": false,
+                // "sort": false,
                 "columns": [
-                    {name: 'seller_token', data: 'seller_token'},
-                    {name: 'first_name', data: 'first_name'},
-                    {name: 'last_name', data: 'last_name'},
-                    {name: 'email', data: 'email'},
-                    {name: 'company_name', data: 'company_name'}
+                    {name: 'seller_token', data: 'user.seller_token'},
+                    {name: 'seller_name', data: 'user.seller_name'},
+                    {name: 'payment_forwarding_address', data: 'payment_forwarding_address'},
+                    {name: 'full_amount', data: 'full_amount'},
+                    {name: 'full_amount_usd', data: 'full_amount_usd'},
+                    {name: 'created_at', data: 'created_at'},
+                    {name: 'status', data: 'status'}
                 ]
             });
             function rebindCopy() {

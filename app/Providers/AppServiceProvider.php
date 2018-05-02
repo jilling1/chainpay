@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Helpers\BlockCypher;
+use App\Helpers\CurrencyRate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,10 +25,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('BlockCypher', function($app)
+        $this->app->singleton('BlockCypher', function()
         {
             $token = env('BLOCKCYPTER_TOKEN');
             return new BlockCypher($token);
+        });
+
+        $this->app->singleton('CurrencyRate', function()
+        {
+            return new CurrencyRate();
         });
     }
 }

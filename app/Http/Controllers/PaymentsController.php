@@ -2,34 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
 {
     public function payments(){
-//        $user = \Auth::user();
-//        $payments = $user->payments->sortBy('createdAt');
         return view('payments.payments');
     }
 
     public function paymentsQuery(Request $request){
 
         $user = \Auth::user();
+        $payments = Payment::where('user_id', $user->id);
 
         if( $request->get('search')['value'] ){
             $search = $request->get('search')['value'];
-            $payments = $user->payments
+            $payments
                 ->where('payment_forwarding_address', $search)
                 ->orWhere('payment_token', $search);
-        }else{
-            $payments = $user->payments;
         }
 
+        $data['recordsFiltered'] = $payments->count();
 
+        $payments = $payments
+            ->skip( $request->get('start') )
+            ->take( $request->get('length') );
 
-        $data['recordsTotal'] = $payments->count();
-        $data['recordsFiltered'] = $data['recordsTotal'];
-        $data['data'] = $payments->sortBy('createdAt');
+        $sortColumn = $request->get('order')[0]['column'];
+        $dir = $request->get('order')[0]['dir'];
+        $column = $request->get('columns')[$sortColumn]['name'];
+
+        $payments = $payments
+            ->orderByRaw("LENGTH($column) $dir")
+            ->orderBy($column, $dir)
+            ->get();
+
+        $data['recordsTotal'] = $user->payments->count();
+        $data['data'] = $payments;
 
         return $data;
     }
