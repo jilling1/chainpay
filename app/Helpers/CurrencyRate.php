@@ -45,17 +45,15 @@ class CurrencyRate
 
     public function getAmountRate( $currency, $amount ){
 
-        $amount *= 100000000;
-
         switch($currency){
             case 'btc':
-                return $this->getRate('btc') * $amount;
+                return round($this->getRate('btc')/100000000 * $amount, 2);
                 break;
             case 'doge':
-                return $this->getRate('doge') * $amount;
+                return round($this->getRate('doge')/100000000 * $amount, 2);
                 break;
             case 'ltc':
-                return $this->getRate('ltc') * $amount;
+                return round($this->getRate('ltc')/100000000 * $amount, 2);
                 break;
             default:
                 return null;

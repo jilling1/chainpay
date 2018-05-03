@@ -36,13 +36,13 @@
                 // "searching": false,
                 // "sort": false,
                 "columns": [
-                    {name: 'seller_token', data: 'user.seller_token'},
-                    {name: 'seller_name', data: 'user.seller_name'},
-                    {name: 'payment_forwarding_address', data: 'payment_forwarding_address'},
-                    {name: 'full_amount', data: 'full_amount'},
-                    {name: 'full_amount_usd', data: 'full_amount_usd'},
-                    {name: 'created_at', data: 'created_at'},
-                    {name: 'status', data: 'status'}
+                    {name: 'seller_token', data: 'user.seller_token', sortable: false, searchable: true},
+                    {name: 'seller_name', data: 'user.seller_name', sortable: false, searchable: true},
+                    {name: 'payment_token', data: 'payment_token', sortable: false, searchable: true},
+                    {name: 'full_amount', data: 'full_amount', searchable: false},
+                    {name: 'full_amount_usd', data: 'full_amount_usd', sortable: false, searchable: false},
+                    {name: 'created_at', data: 'created_at', searchable: false},
+                    {name: 'status', data: 'status', searchable: false}
                 ]
             });
             function rebindCopy() {
