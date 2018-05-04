@@ -77,4 +77,45 @@ class AdminController extends Controller
         return $data;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function generalSettings(){
+        return view('admin.settings');
+    }
+
+    public function saveGeneralSettings(Request $request){
+        $request->validate([
+            'fees_percent' => 'numeric|min:0|max:99',
+            'btc_fees_address' => 'required',
+            'doge_fees_address' => '',
+            'ltc_fees_address' => '',
+            'payment_await_limit' => 'numeric|min:1|max:999999'
+        ]);
+
+
+    }
+
+    private function changeEnv($data = array()){
+        if(count($data) > 0){
+            $env = file_get_contents(base_path() . '/.env');
+            $env = preg_split('/\s+/', $env);
+            foreach((array)$data as $key => $value){
+                foreach($env as $env_key => $env_value){
+                    $entry = explode("=", $env_value, 2);
+                    if($entry[0] == $key){
+                        $env[$env_key] = $key . "=" . $value;
+                    } else {
+                        $env[$env_key] = $env_value;
+                    }
+                }
+            }
+            $env = implode("\n", $env);
+            file_put_contents(base_path() . '/.env', $env);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

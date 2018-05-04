@@ -19,6 +19,11 @@
                     </div>
                     <div class="sidebar-nav-container">
                         <ul class="list-nav sidebar-nav list-nav-dark list-nav-dark-info">
+                            @if(\Auth::user()->isAdmin())
+                                <li class="list-nav-group-title">
+                                    <span>User Area</span>
+                                </li>
+                            @endif
                             <li class="list-nav-item">
                                 <a href="{{route('company-info')}}" class="list-nav-link">
                                   <span class="list-nav-icon">
@@ -56,6 +61,9 @@
                             </li>
 
                             @if(\Auth::user()->isAdmin())
+                                <li class="list-nav-group-title">
+                                    <span>Admin Area</span>
+                                </li>
                                 <li class="list-nav-item">
                                     <a href="{{route('sellers')}}" class="list-nav-link">
                                     <span class="list-nav-icon">
@@ -72,6 +80,14 @@
                                         <span class="list-nav-label">All Payments</span>
                                     </a>
                                 </li>
+                                <li class="list-nav-item">
+                                    <a href="{{route('general-settings')}}" class="list-nav-link">
+                                    <span class="list-nav-icon">
+                                        <i class="material-icons">settings_applications</i>
+                                    </span>
+                                        <span class="list-nav-label">Settings</span>
+                                    </a>
+                                </li>
                             @endif
                         </ul>
                     </div>
@@ -81,9 +97,6 @@
         <div class="page">
             <div class="topbar-container">
                 <nav class="navbar bg-white text-secondary navbar-expand-sm py-0 topbar fixed">
-                    <button class="btn btn-flat-secondary btn-sm btn-icon mr-1 no-shadow d-none d-xl-block sidebar-toggle">
-                        <i class="material-icons">menu</i>
-                    </button>
                     <button class="btn btn-flat-secondary btn-sm btn-icon mr-1 d-xl-none no-shadow sidebar-hide">
                         <i class="material-icons">menu</i>
                     </button>

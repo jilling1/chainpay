@@ -36,6 +36,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function(){
 
     Route::get('payments', 'AdminController@payments')->name('all-payments');
     Route::get('payments/query', 'AdminController@paymentsQuery')->name('all-payments-query');
+
+    Route::get('general-settings', 'AdminController@generalSettings')->name('general-settings');
+    Route::post('save-general-settings', 'AdminController@saveGeneralSettings')->name('save-general-settings');
 });
 
 

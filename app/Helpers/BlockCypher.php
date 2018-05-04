@@ -55,8 +55,8 @@ class BlockCypher
         $paymentForwardClient = new PaymentForwardClient($apiContext);
         $options = array(
             'callback_url' => $callback,
-            'process_fees_address' => env('FEES_ADDRESS'),
-            'process_fees_percent' => (float)env('FEE_PERCENT')
+            'process_fees_address' => env('BTC_FEES_ADDRESS'),
+            'process_fees_percent' => (float)env('FEES_PERCENT')
         );
         $paymentForwardObject = $paymentForwardClient->createForwardingAddress($destination, $options);
         return $paymentForwardObject;
