@@ -38,7 +38,7 @@
                 "columns": [
                     {name: 'seller_token', data: 'user.seller_token', sortable: false, searchable: true},
                     {name: 'seller_name', data: 'user.seller_name', sortable: false, searchable: true},
-                    {name: 'payment_token', data: 'payment_token', sortable: false, searchable: true},
+                    {name: 'payment_forwarding_address', data: 'payment_forwarding_address', sortable: false, searchable: true},
                     {name: 'full_amount', data: 'full_amount', searchable: false},
                     {name: 'full_amount_usd', data: 'full_amount_usd', sortable: false, searchable: false},
                     {name: 'created_at', data: 'created_at', searchable: false},

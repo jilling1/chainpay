@@ -31,22 +31,30 @@ class AdminController extends Controller
         return $data;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function payments(){
-
-
-
         return view('admin.payments');
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function paymentsQuery(Request $request){
 
         $payments = Payment::with('user');
 
         if( $request->get('search')['value'] ){
-//            $search = $request->get('search')['value'];
-//            $payments
-//                ->where('payment_forwarding_address', $search)
-//                ->orWhere('payment_token', $search);
+            $search = $request->get('search')['value'];
+            $payments
+                ->where('payment_forwarding_address', $search)
+                ->orWhere('payment_token', $search)
+                ->orWhereHas('user', function($query) use ($search){
+                    $query->where(DB::raw('concat(first_name," ",last_name)') , 'LIKE' , '%'.$search.'%')
+                        ->orWhere('seller_token', '=', $search);
+                });
         }
 
         $payments = $payments
