@@ -13,7 +13,7 @@
                     <div class="card-body row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="fees_percent">Fee Percent* <span class="text-secondary">(0-100%)</span></label>
+                                <label for="fees_percent">Fee Percent* <span class="text-secondary">(0-99%)</span></label>
                                 <div class="input-group">
                                     <input class="form-control" id="fees_percent" name="fees_percent" type="number"
                                            value="{{ env('FEES_PERCENT')*100 }}" min="0" max="99" required>

@@ -88,12 +88,29 @@ class AdminController extends Controller
         $request->validate([
             'fees_percent' => 'numeric|min:0|max:99',
             'btc_fees_address' => 'required',
-            'doge_fees_address' => '',
-            'ltc_fees_address' => '',
+            'doge_fees_address' => 'required',
+            'ltc_fees_address' => 'required',
             'payment_await_limit' => 'numeric|min:1|max:999999'
         ]);
 
-
+        $envArray = [];
+        if( ($request->get('fees_percent')) !==  env('FEES_PERCENT')*100){
+            $envArray['FEES_PERCENT'] = $request->get('fees_percent')/100;
+        }
+        if( $request->get('btc_fees_address') !==  env('BTC_FEES_ADDRESS') ){
+            $envArray['BTC_FEES_ADDRESS'] = $request->get('btc_fees_address');
+        }
+        if( $request->get('doge_fees_address') !==  env('DOGE_FEES_ADDRESS') ){
+            $envArray['DOGE_FEES_ADDRESS'] = $request->get('doge_fees_address');
+        }
+        if( $request->get('ltc_fees_address') !==  env('LTC_FEES_ADDRESS') ){
+            $envArray['LTC_FEES_ADDRESS'] = $request->get('ltc_fees_address');
+        }
+        if( $request->get('payment_await_limit') !==  env('PAYMENTS_AWAIT_LIMIT_SECONDS') ){
+            $envArray['PAYMENTS_AWAIT_LIMIT_SECONDS'] = $request->get('payment_await_limit');
+        }
+        if( count($envArray) > 0 )
+            $this->changeEnv( $envArray );
     }
 
     private function changeEnv($data = array()){
