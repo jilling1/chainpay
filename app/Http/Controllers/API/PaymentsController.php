@@ -12,9 +12,23 @@ use Illuminate\Support\Facades\Log;
 
 class PaymentsController extends Controller
 {
-    public function requestCurrency()
+    public function requestCurrency(Request $request)
     {
+        $request->validate([
+            'value' => 'required|numeric',
+            'currency' => 'required',
+        ]);
 
+        $currency = Currency::where('currency_code', $request->get('currency'))->firstOrFail();
+
+        $value = app('CurrencyRate')->getCurrencyRate($currency->currency_code, $request->get('value'));
+
+        $data = [
+            'currency' => '$currency->currency_code',
+            'amount' => $value,
+        ];
+
+        return response()->json($this->getSuccessResponse($data));
     }
 
     /**

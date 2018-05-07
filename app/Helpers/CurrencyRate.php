@@ -43,8 +43,13 @@ class CurrencyRate
         }
     }
 
+    /**
+     * return usd amount
+     * @param $currency
+     * @param $amount
+     * @return float|null
+     */
     public function getAmountRate( $currency, $amount ){
-
         switch($currency){
             case 'btc':
                 return round($this->getRate('btc')/100000000 * $amount, 2);
@@ -60,4 +65,25 @@ class CurrencyRate
         }
     }
 
+    /**
+     *  return cryptocurrency amount
+     * @param $currency
+     * @param $amount
+     * @return float|null
+     */
+    public function getCurrencyRate( $currency, $amount ){
+        switch($currency){
+            case 'btc':
+                return round( 100000000 / $this->getRate('btc') * $amount );
+                break;
+            case 'doge':
+                return round( 100000000 / $this->getRate('doge') * $amount );
+                break;
+            case 'ltc':
+                return round( 100000000 / $this->getRate('ltc') * $amount );
+                break;
+            default:
+                return null;
+        }
+    }
 }
