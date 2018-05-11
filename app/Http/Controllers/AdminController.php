@@ -94,7 +94,7 @@ class AdminController extends Controller
         ]);
 
         $envArray = [];
-        if( ($request->get('fees_percent')) !==  env('FEES_PERCENT')*100){
+        if( ($request->get('fees_percent')) !==  env('FEES_PERCENT')||0*100){
             $envArray['FEES_PERCENT'] = $request->get('fees_percent')/100;
         }
         if( $request->get('btc_fees_address') !==  env('BTC_FEES_ADDRESS') ){

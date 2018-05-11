@@ -8,7 +8,7 @@
                     <b>Payments</b>
                 </div>
                 <div class="card-body">
-                    <table id="sellers-table">
+                    <table id="payments-table">
                         <thead>
                         <tr>
                             <th>Seller Token</th>
@@ -27,7 +27,7 @@
     </div>
     <script>
         $(document).ready( function () {
-            let table = $('#sellers-table');
+            let table = $('#payments-table');
             table.DataTable({
                 "order": [[ 6, "desc" ]],
                 "ajax": "{{route('all-payments-query')}}",
@@ -53,9 +53,10 @@
                     toastr.info('Copied to clipboard');
                 });
             }
-            table.on( 'order.dt', function () { rebindCopy() } );
-            table.on( 'page.dt', function () { rebindCopy() } );
-            table.on( 'search.dt', function () { rebindCopy() } );
+            table.on( 'order.dt', function () { rebindCopy(); console.log('11'); } );
+            table.on( 'page.dt', function () { rebindCopy(); console.log('22'); } );
+            table.on( 'search.dt', function () { rebindCopy(); console.log('33'); } );
+            table.on( 'draw.dt', function () { rebindCopy(); console.log('44'); } );
         } );
     </script>
     <style>
