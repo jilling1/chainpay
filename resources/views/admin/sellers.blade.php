@@ -32,16 +32,18 @@
                 "processing":true,
                 "serverSide":true,
                 "searching": false,
-                "sort": false,
+                // "sort": false,
                 "columns": [
-                    {name: 'seller_token', data: 'seller_token'},
-                    {name: 'first_name', data: 'first_name'},
-                    {name: 'last_name', data: 'last_name'},
-                    {name: 'email', data: 'email'},
-                    {name: 'company_name', data: 'company_name'}
+                    {name: 'seller_token', data: 'seller_token', sortable: false},
+                    {name: 'first_name', data: 'first_name', sortable: false},
+                    {name: 'last_name', data: 'last_name', sortable: false},
+                    {name: 'email', data: 'email', sortable: false},
+                    {name: 'company_name', data: 'company_name', sortable: false}
                 ]
             });
+
             function rebindCopy() {
+
                 let elements = table.find('tbody td');
                 elements.unbind('click');
                 elements.on('click', (evt)=>{
