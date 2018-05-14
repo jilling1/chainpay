@@ -1,7 +1,7 @@
 @extends('layouts.app_layout')
 @section('title', 'Sellers List')
 @section('content')
-    <div class="row">
+    <div class="row" style="overflow: auto;">
         <div class="col-md-12" style="width: auto">
             <div class="card">
                 <div class="card-header">
@@ -53,10 +53,8 @@
                     toastr.info('Copied to clipboard');
                 });
             }
-            table.on( 'order.dt', function () { rebindCopy(); console.log('11'); } );
-            table.on( 'page.dt', function () { rebindCopy(); console.log('22'); } );
-            table.on( 'search.dt', function () { rebindCopy(); console.log('33'); } );
-            table.on( 'draw.dt', function () { rebindCopy(); console.log('44'); } );
+            table.on( 'draw.dt', function () { rebindCopy() } );
+
         } );
     </script>
     <style>

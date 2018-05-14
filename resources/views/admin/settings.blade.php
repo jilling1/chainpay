@@ -16,7 +16,7 @@
                                 <label for="fees_percent">Fee Percent* <span class="text-secondary">(0-99%)</span></label>
                                 <div class="input-group">
                                     <input class="form-control" id="fees_percent" name="fees_percent" type="number"
-                                           value="{{ env('FEES_PERCENT')||0*100 }}" min="0" max="99" required>
+                                           value="{{ (float)env('FEES_PERCENT')*100 }}" min="0" max="99" required>
                                     <span class="input-group-addon bg-light">%</span>
                                 </div>
                             </div>

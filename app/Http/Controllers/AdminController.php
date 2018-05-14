@@ -57,6 +57,8 @@ class AdminController extends Controller
                 });
         }
 
+        $filteredCount = $payments->count();
+
         $payments = $payments
             ->skip( $request->get('start') )
             ->take( $request->get('length') );
@@ -70,8 +72,8 @@ class AdminController extends Controller
             ->orderBy($column, $dir)
             ->get();
 
-        $data['recordsFiltered'] = Payment::count();
-        $data['recordsTotal'] = $payments->count();
+        $data['recordsFiltered'] = $filteredCount;
+        $data['recordsTotal'] = Payment::count();
         $data['data'] = $payments->flatten()->toArray();
 
         return $data;
