@@ -43,7 +43,7 @@
             });
 
             function rebindCopy() {
-
+                    //Влад, удачи тебе. 11 мая 2018
                 let elements = table.find('tbody td');
                 elements.unbind('click');
                 elements.on('click', (evt)=>{
