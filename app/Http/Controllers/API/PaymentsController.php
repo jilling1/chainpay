@@ -24,7 +24,7 @@ class PaymentsController extends Controller
         $value = app('CurrencyRate')->getCurrencyRate($currency->currency_code, $request->get('value'));
 
         $data = [
-            'currency' => '$currency->currency_code',
+            'currency' => $currency->currency_code,
             'amount' => $value,
         ];
 
