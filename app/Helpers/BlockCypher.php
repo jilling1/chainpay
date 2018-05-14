@@ -15,6 +15,7 @@ class BlockCypher
     private $btcAPIContext;
     private $dogeAPIContext;
     private $ltcAPIContext;
+    private $dashAPIContext;
 
     public $currency;
 
@@ -39,6 +40,10 @@ class BlockCypher
                 new SimpleTokenCredential($token),
                 $config
             );
+            $this->dashAPIContext = ApiContext::create('main', 'dash', 'v1',
+                new SimpleTokenCredential($token),
+                $config
+            );
         } catch (BlockCypherConfigurationException $e) {
             dd($e);
         }
@@ -55,7 +60,7 @@ class BlockCypher
         $paymentForwardClient = new PaymentForwardClient($apiContext);
         $options = array(
             'callback_url' => $callback,
-            'process_fees_address' => env('BTC_FEES_ADDRESS'),
+            'process_fees_address' => env( strtoupper($this->currency) . '_FEES_ADDRESS' ),
             'process_fees_percent' => (float)env('FEES_PERCENT')
         );
         $paymentForwardObject = $paymentForwardClient->createForwardingAddress($destination, $options);

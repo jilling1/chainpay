@@ -36,6 +36,11 @@
                                        value="{{ env('LTC_FEES_ADDRESS') }}">
                             </div>
                             <div class="form-group">
+                                <label for="dash_fees_address">DASH Fees Address</label>
+                                <input class="form-control" id="dash_fees_address" name="dash_fees_address" type="text"
+                                       value="{{ env('DASH_FEES_ADDRESS') }}">
+                            </div>
+                            <div class="form-group">
                                 <label for="payment_await_limit">Payment Await Limit* <span class="text-secondary">(seconds)</span></label>
                                 <input class="form-control" id="payment_await_limit" name="payment_await_limit" type="number"
                                        value="{{ env('PAYMENTS_AWAIT_LIMIT_SECONDS') }}" min="1" max="999999" required>

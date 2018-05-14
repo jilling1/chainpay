@@ -13,23 +13,30 @@
                     <div class="card-body row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="btc_address">BTC</label>
+                                <label for="btc_address">BTC Address</label>
                                 <input class="form-control" id="btc_address" name="btc_address" type="text"
                                        value="{{\Auth::user()->btc_address}}">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="doge_address">DOGE</label>
+                                <label for="doge_address">DOGE Address</label>
                                 <input class="form-control" id="doge_address" name="doge_address" type="text"
                                        value="{{\Auth::user()->doge_address}}">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="ltc_address">LTC</label>
+                                <label for="ltc_address">LTC Address</label>
                                 <input class="form-control" id="ltc_address" name="ltc_address" type="text"
                                        value="{{\Auth::user()->ltc_address}}">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="dash_address">DASH Address</label>
+                                <input class="form-control" id="dash_address" name="dash_address" type="text"
+                                       value="{{\Auth::user()->dash_address}}">
                             </div>
                         </div>
                         <div class="col-md-12">

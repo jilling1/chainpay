@@ -29,7 +29,8 @@ class User extends Authenticatable
         'phone_number',
         'btc_address',
         'doge_address',
-        'ltc_address'
+        'ltc_address',
+        'dash_address'
     ];
 
     /**

@@ -30,6 +30,12 @@ class CurrenciesSeeder extends Seeder
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s")
             ]);
+            DB::table('currencies')->insert([
+                'id' => 4,
+                'currency_code' => 'dash',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
         } catch (Exception $e) {
         }
     }

@@ -18,6 +18,9 @@
                             <label for="currency">Currency</label>
                             <select class="form-control" name="currency" id="currency">
                                 <option selected value="btc">btc</option>
+                                <option value="doge">doge</option>
+                                <option value="ltc">ltc</option>
+                                <option value="dash">dash</option>
                             </select>
                         </div>
                         <div class="form-group">

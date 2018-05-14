@@ -90,6 +90,7 @@ class AdminController extends Controller
             'btc_fees_address' => 'required',
             'doge_fees_address' => 'required',
             'ltc_fees_address' => 'required',
+            'dash_fees_address' => 'required',
             'payment_await_limit' => 'numeric|min:1|max:999999'
         ]);
 
@@ -105,6 +106,9 @@ class AdminController extends Controller
         }
         if( $request->get('ltc_fees_address') !==  env('LTC_FEES_ADDRESS') ){
             $envArray['LTC_FEES_ADDRESS'] = $request->get('ltc_fees_address');
+        }
+        if( $request->get('dash_fees_address') !==  env('DASH_FEES_ADDRESS') ){
+            $envArray['DASH_FEES_ADDRESS'] = $request->get('dash_fees_address');
         }
         if( $request->get('payment_await_limit') !==  env('PAYMENTS_AWAIT_LIMIT_SECONDS') ){
             $envArray['PAYMENTS_AWAIT_LIMIT_SECONDS'] = $request->get('payment_await_limit');

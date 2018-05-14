@@ -16,15 +16,11 @@ class UserController extends Controller
     }
 
     public function saveWalletsAddresses(Request $request){
-        $request->validate([
-            'btc' => 'sometimes|size:34',
-            'doge' => 'sometimes|size:34',
-            'ltc' => 'sometimes|size:34'
-        ]);
         $request->user()->fill([
             'btc_address' => $request->get('btc_address'),
             'doge_address' => $request->get('doge_address'),
-            'ltc_address' => $request->get('ltc_address')
+            'ltc_address' => $request->get('ltc_address'),
+            'dash_address' => $request->get('dash_address')
         ])->save();
     }
 

@@ -44,10 +44,11 @@ class PaymentsController extends Controller
             'callback_url' => 'url'
         ]);
 
-        if ( !in_array($request->get('currency'), ['btc', 'doge', 'ltc']) )
-            return response()->json($this->getErrorArray('Currency not found'));
-
         $currency = Currency::where('currency_code', $request->get('currency'))->first();
+        if ( empty($currency) ) {
+            return response()->json($this->getErrorArray('Currency not found'));
+        }
+
         if (empty($currency)) return response()->json($this->getErrorArray('Currency not found'));
 
         $user = User::where('seller_token', $request->get('seller_token'))->first();
@@ -60,7 +61,9 @@ class PaymentsController extends Controller
         $callback = env('APP_URL'). '/api/payment-callback/'.$paymentToken;
 
         app('BlockCypher')->currency = $currency->currency_code;
-        $paymentForwardingObject = app('BlockCypher')->createPaymentEndpoint($user->btc_address, $callback);
+
+        $userCurrencyField = $currency->currency_code.'_address';
+        $paymentForwardingObject = app('BlockCypher')->createPaymentEndpoint($user->$userCurrencyField, $callback);
 
         $payment = Payment::create([
             'payment_forwarding_address' => $paymentForwardingObject->input_address,
