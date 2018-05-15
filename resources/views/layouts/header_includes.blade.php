@@ -12,9 +12,9 @@
 <script src="/vendor/bootstrap.min.js"></script>
 <script src="/vendor/perfect-scrollbar.min.js"></script>
 
-<script src="/vendor/hammer.min.js"></script>
+{{--<script src="/vendor/hammer.min.js"></script>--}}
 <script src="/vendor/jquery-ui/jquery-ui.min.js"></script>
-<script src="/scripts/sidebar.min.js"></script>
+<script src="/scripts/sidebar.js"></script>
 <script src="/scripts/collapsible-nav.min.js"></script>
 <script src="/vendor/color/color.min.js"></script>
 <script src="/scripts/colors.min.js"></script>

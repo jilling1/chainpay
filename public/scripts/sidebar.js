@@ -48,16 +48,17 @@ $.fn.collpasibleSlider = function(options) {
         return true;
       })
     }
-    if(settings.gestures) {
-      var hammertime = new Hammer(document.querySelector('.full-page'));
-      hammertime.on('swipeleft', function(ev) {
-        hide(element);
-      });
-      hammertime.on('swiperight', function(ev) {
-        show(element);
-      });
 
-    }
+    // if(settings.gestures) {
+    //   var hammertime = new Hammer(document.querySelector('.full-page'));
+    //   hammertime.on('swipeleft', function(ev) {
+    //     hide(element);
+    //   });
+    //   hammertime.on('swiperight', function(ev) {
+    //     show(element);
+    //   });
+    // }
+
     function collapse(element){
         element.addClass(settings.miniClass);
         if(settings.pageClasses)
