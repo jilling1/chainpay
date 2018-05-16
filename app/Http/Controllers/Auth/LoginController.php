@@ -20,12 +20,16 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
+//    protected $redirectTo = '/';
+
+    protected function redirectTo()
+    {
+        if( !\Auth::user()->isFieldsFilled() ){
+            return '/intro';
+        }else{
+            return '/';
+        }
+    }
 
     /**
      * Create a new controller instance.
