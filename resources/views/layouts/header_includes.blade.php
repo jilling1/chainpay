@@ -28,3 +28,9 @@
 <script src="/vendor/jquery.dataTables.js"></script>
 
 <script src="/js/app.js"></script>
+
+<style>
+    .dataTable>tbody>tr>td{
+        cursor: pointer;
+    }
+</style>
