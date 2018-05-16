@@ -32,7 +32,7 @@
                 "processing":true,
                 "serverSide":true,
                 "searching": false,
-                // "sort": false,
+                "sort": false,
                 "columns": [
                     {name: 'seller_token', data: 'seller_token', sortable: false},
                     {name: 'first_name', data: 'first_name', sortable: false},
