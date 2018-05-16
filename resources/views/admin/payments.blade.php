@@ -14,6 +14,7 @@
                             <th>Seller Token</th>
                             <th>Seller Name</th>
                             <th>Payment Address</th>
+                            <th>Currency</th>
                             <th>Amount</th>
                             <th>Amount (USD)</th>
                             <th>Date</th>
@@ -39,6 +40,7 @@
                     {name: 'seller_token', data: 'user.seller_token', sortable: false, searchable: true},
                     {name: 'seller_name', data: 'user.seller_name', sortable: false, searchable: true},
                     {name: 'payment_forwarding_address', data: 'payment_forwarding_address', sortable: false, searchable: true},
+                    {name: 'currency', data: 'currency.currency_code', searchable: false, orderable: false},
                     {name: 'full_amount', data: 'full_amount', searchable: false},
                     {name: 'full_amount_usd', data: 'full_amount_usd', sortable: false, searchable: false},
                     {name: 'created_at', data: 'created_at', searchable: false},

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Models\Currency;
 use App\Models\Payment;
 use App\Models\User;
+use BlockCypher\Exception\BlockCypherConfigurationException;
+use BlockCypher\Exception\BlockCypherConnectionException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use \GuzzleHttp\Client;
@@ -40,7 +42,7 @@ class PaymentsController extends Controller
         $request->validate([
             'seller_token' => 'required',
             'currency' => 'required',
-            'amount' => 'required|numeric',
+            'amount' => 'required|numeric|min:1',
             'callback_url' => 'url'
         ]);
 
@@ -63,7 +65,12 @@ class PaymentsController extends Controller
         app('BlockCypher')->currency = $currency->currency_code;
 
         $userCurrencyField = $currency->currency_code.'_address';
-        $paymentForwardingObject = app('BlockCypher')->createPaymentEndpoint($user->$userCurrencyField, $callback);
+
+        try{
+            $paymentForwardingObject = app('BlockCypher')->createPaymentEndpoint($user->$userCurrencyField, $callback);
+        }catch(BlockCypherConnectionException $e){
+            return response()->json($this->getErrorArray( json_decode($e->getData())->error ));
+        }
 
         $payment = Payment::create([
             'payment_forwarding_address' => $paymentForwardingObject->input_address,

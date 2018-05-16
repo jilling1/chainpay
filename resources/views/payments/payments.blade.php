@@ -13,6 +13,7 @@
                             <tr>
                                 <th>Payment address</th>
                                 <th>Amount</th>
+                                <th>Currency</th>
                                 <th>Status</th>
                                 <th>Payed</th>
                                 <th>Payment token</th>
@@ -31,13 +32,14 @@
             let table = $('#payments-table');
 
             table.DataTable({
-                "order": [[ 6, "desc" ]],
+                "order": [[ 7, "desc" ]],
                 "ajax": "{{route('payments-query')}}",
                 "processing":true,
                 "serverSide":true,
                 "columns": [
                     {name: 'payment_forwarding_address', data: 'payment_forwarding_address', searchable: true, orderable: false},
                     {name: 'full_amount', data: 'full_amount', searchable: false},
+                    {name: 'currency', data: 'currency.currency_code', searchable: false, orderable: false},
                     {name: 'status', data: 'status', searchable: false},
                     {name: 'payed', data: 'payed', searchable: false},
                     {name: 'payment_token', data: 'payment_token', searchable: true, orderable: false},
