@@ -112,7 +112,7 @@
                             <li class="nav-item dropdown no-caret ml-4">
                                 <a class="text-xs nav-link dropdown-toggle" id="navbarDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="http://via.placeholder.com/256x256" class="img-thumb-xs mr-1 align-middle"
+                                    <img src="https://via.placeholder.com/256x256" class="img-thumb-xs mr-1 align-middle"
                                          alt="">
                                     <i class="material-icons">expand_more</i>
                                 </a>
