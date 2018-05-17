@@ -62,4 +62,24 @@ class User extends Authenticatable
         return $this->first_name . ' ' . $this->last_name;
     }
 
+    /**
+     * @return bool
+     */
+    public function isFieldsFilled(){
+        if(
+            empty($this->first_name) ||
+            empty($this->last_name) ||
+            empty($this->company_name) ||
+            (
+                empty($this->btc_address) &&
+                empty($this->doge_address) &&
+                empty($this->ltc_address) &&
+                empty($this->dash_address)
+            )
+        ){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

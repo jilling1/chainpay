@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/wallets-addresses', 'UserController@saveWalletsAddresses')->name('save-wallets-addresses');
 
     Route::get('/testing-api', 'TestController@testingApi')->name('testing');
+
+    Route::get('/intro', 'GenericController@introPage')->name('intro');
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function(){

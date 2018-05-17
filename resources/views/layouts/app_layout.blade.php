@@ -109,6 +109,11 @@
                                    type="search" placeholder="Search" aria-label="Search">
                         </div>
                         <ul class="navbar-nav">
+                            <li class="nav-item no-caret ml-4">
+                                <a href="{{route('intro')}}" class="nav-link">
+                                    <i class="material-icons">help</i>
+                                </a>
+                            </li>
                             <li class="nav-item dropdown no-caret ml-4">
                                 <a class="text-xs nav-link dropdown-toggle" id="navbarDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
