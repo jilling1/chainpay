@@ -129,7 +129,7 @@ class PaymentsController extends Controller
         if(empty($payment)) return response()->json($this->getErrorArray('Payment not found'));
 
         $data = [
-            'status' => Payment::$status[$payment->status],
+            'status' => $payment->status,
             'payed' => $payment->payed,
             'full_amount' => $payment->full_amount,
             'payment_forwarding_address' => $payment->payment_forwarding_address
